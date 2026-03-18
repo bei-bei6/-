@@ -1,0 +1,27 @@
+function[NErr,ed]=RAP_Swirl(x,data)
+r1=data.d1/2;
+r2=data.d2/2;
+rm=(r1+r2)/2;
+w1=data.GasIn.Swirl/rm^2;
+w2=x;
+W=abs(data.GasOut.W)/data.N;
+Rew=data.Rew;
+Ct=[0.073/Rew^0.2 0.073/Rew^0.2];
+L=sqrt((data.Node1.x-data.Node2.x)^2+(data.Node1.y-data.Node2.y)^2+(data.Node1.z-data.Node2.z)^2);
+Ai=[2*pi*r1*L 2*pi*r2*L];
+A=1/4*pi*(data.d2^2-data.d1^2);
+wai=(w1+w2)/2;
+[~,~,~,rhos1,~,~]=WcalcStat(data.GasIn.Pt,data.GasIn.Tt,W,A,data);
+[~,~,~,rhos2,~,~]=WcalcStat(data.GasOut.Pt,data.GasOut.Tt,W,A,data);
+rho_m=(rhos1+rhos2)/2;
+wf1=2*pi*(data.RESI/60);
+wf2=2*pi*(data.RESO/60);
+ti(1)=1/2*rho_m*r1^3*(wf1-wai)*abs(wf1-wai)*Ct(1)*Ai(1);% 内壁面作用
+ti(2)=1/2*rho_m*r2^3*(wf2-wai)*abs(wf2-wai)*Ct(2)*Ai(2);% 外壁面作用
+Tot_ti=sum(ti);
+Swirl2=((Tot_ti+W*w1*rm^2))/W;
+w2_n=Swirl2/rm^2;
+NErr=w2_n-w2;
+ed.Swirl2=Swirl2;
+ed.w2_n=w2_n;
+end

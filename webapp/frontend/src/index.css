@@ -1,0 +1,66 @@
+:root {
+  font-family:
+    Bahnschrift,
+    'Segoe UI Variable',
+    'Microsoft YaHei UI',
+    'PingFang SC',
+    sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #122132;
+  background:
+    radial-gradient(circle at top left, rgba(242, 199, 126, 0.28), transparent 30%),
+    radial-gradient(circle at top right, rgba(59, 112, 163, 0.18), transparent 28%),
+    linear-gradient(180deg, #edf2f4 0%, #d9e4ea 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(28px, 2.6vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+p {
+  margin: 0;
+}
