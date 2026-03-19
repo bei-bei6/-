@@ -1,21 +1,15 @@
+@import './styles/tokens.css';
+@import './styles/app.css';
+@import './styles/components.css';
+@import './styles/modules/topology.css';
+@import './styles/modules/design.css';
+@import './styles/modules/steady.css';
+@import './styles/modules/transient.css';
+@import './styles/modules/adaptation.css';
+@import './styles/modules/project.css';
+
 :root {
-  font-family:
-    Bahnschrift,
-    'Segoe UI Variable',
-    'Microsoft YaHei UI',
-    'PingFang SC',
-    sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #122132;
-  background:
-    radial-gradient(circle at top left, rgba(242, 199, 126, 0.28), transparent 30%),
-    radial-gradient(circle at top right, rgba(59, 112, 163, 0.18), transparent 28%),
-    linear-gradient(180deg, #edf2f4 0%, #d9e4ea 100%);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
 }
 
 * {
@@ -31,6 +25,7 @@ body,
 
 body {
   min-height: 100vh;
+  color: var(--color-text);
 }
 
 button,
@@ -54,10 +49,12 @@ h2 {
 }
 
 h3 {
+  margin: 0;
   font-size: 20px;
 }
 
 h4 {
+  margin: 0;
   font-size: 16px;
 }
 

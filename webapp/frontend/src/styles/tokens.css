@@ -1,0 +1,57 @@
+:root {
+  --font-sans: Bahnschrift, 'Segoe UI Variable', 'Microsoft YaHei UI', 'PingFang SC', sans-serif;
+  --font-mono: 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+
+  --color-text: #13263a;
+  --color-text-muted: #627789;
+  --color-text-soft: #7b8f9f;
+  --color-surface: rgba(255, 255, 255, 0.78);
+  --color-surface-strong: rgba(255, 255, 255, 0.92);
+  --color-surface-subtle: rgba(246, 248, 251, 0.72);
+  --color-border: rgba(91, 114, 130, 0.16);
+  --color-border-strong: rgba(81, 108, 130, 0.24);
+  --color-panel-shadow: 0 28px 70px rgba(19, 42, 58, 0.1);
+  --color-panel-shadow-strong: 0 30px 80px rgba(15, 45, 71, 0.14);
+
+  --color-brand: #0f5b78;
+  --color-brand-2: #1d7f6d;
+  --color-brand-soft: rgba(15, 91, 120, 0.1);
+  --color-brand-soft-2: rgba(29, 127, 109, 0.1);
+  --color-warning: #9d6530;
+  --color-warning-soft: rgba(214, 122, 45, 0.14);
+  --color-danger: #9a3843;
+  --color-danger-soft: rgba(207, 76, 92, 0.14);
+  --color-success: #0d6b56;
+  --color-success-soft: rgba(29, 127, 109, 0.14);
+
+  --radius-xs: 12px;
+  --radius-sm: 16px;
+  --radius-md: 22px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 40px;
+
+  --duration-fast: 0.18s;
+  --duration-base: 0.24s;
+  --easing-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at top left, rgba(252, 199, 90, 0.22), transparent 28%),
+    radial-gradient(circle at top right, rgba(71, 138, 200, 0.16), transparent 25%),
+    linear-gradient(180deg, #eef3f7 0%, #dde8f0 45%, #d7e0e8 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

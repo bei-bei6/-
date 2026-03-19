@@ -1,0 +1,361 @@
+.app-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.app-loading__card {
+  min-width: min(560px, 100%);
+  display: grid;
+  gap: 10px;
+  padding: 32px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: var(--color-panel-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.app-loading__card strong {
+  font-size: 22px;
+  color: var(--color-text);
+}
+
+.app-loading__card span {
+  color: var(--color-text-muted);
+}
+
+.app-shell {
+  max-width: 1520px;
+  margin: 0 auto;
+  padding: 36px 56px 64px;
+  display: grid;
+  gap: 20px;
+}
+
+.masthead,
+.command-deck,
+.module-tabs,
+.panel,
+.alert {
+  border: 1px solid var(--color-border);
+  background: rgba(251, 252, 254, 0.76);
+  box-shadow: var(--color-panel-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.masthead,
+.panel {
+  border-radius: var(--radius-lg);
+}
+
+.command-deck,
+.module-tabs,
+.alert {
+  border-radius: var(--radius-md);
+}
+
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.92fr);
+  gap: 24px;
+  align-items: stretch;
+  padding: 28px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.masthead::before,
+.command-card--hero::before,
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.28), transparent 45%, rgba(15, 91, 120, 0.04));
+  pointer-events: none;
+}
+
+.masthead__copy,
+.masthead__side {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title-block {
+  display: grid;
+  gap: 12px;
+  max-width: 780px;
+}
+
+.lead,
+.deck-copy,
+.panel-header p,
+.chart-panel__head p,
+.topology-card p,
+.inline-input small,
+.empty-state p,
+.capability-item span,
+.metric-tile small,
+.stat-card small {
+  color: var(--color-text-muted);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #60788d;
+}
+
+.masthead__side,
+.status-cluster,
+.hero-actions,
+.command-buttons,
+.button-row,
+.detail-toolbar,
+.tag-row,
+.panel-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.masthead__side {
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.command-deck {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(420px, 0.95fr);
+  gap: 10px;
+}
+
+.command-card,
+.metric-tile,
+.module-tab,
+.field-section,
+.chart-panel,
+.object-card,
+.topology-card,
+.stat-card,
+.inline-info,
+.empty-state,
+.fold-card,
+.tag,
+.capability-item {
+  border: 1px solid rgba(91, 114, 130, 0.14);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+.command-card {
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.command-card--hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  min-height: 150px;
+}
+
+.command-card__copy {
+  display: grid;
+  gap: 12px;
+  max-width: 720px;
+  position: relative;
+  z-index: 1;
+}
+
+.tag-row {
+  gap: 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #2a455b;
+}
+
+.tag--muted {
+  background: rgba(240, 245, 248, 0.92);
+}
+
+.command-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-content: stretch;
+}
+
+.module-tabs {
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.module-shell {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.module-controls {
+  position: sticky;
+  top: 22px;
+}
+
+.module-results-stack,
+.control-stack,
+.topology-gallery,
+.project-stack,
+.object-list,
+.capability-list,
+.schedule-editor,
+.insight-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.insight-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.topology-grid .panel,
+.adaptation-grid .panel,
+.project-grid .panel {
+  min-height: 100%;
+}
+
+.topology-hero {
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(15, 91, 120, 0.1), rgba(29, 127, 109, 0.08));
+  border: 1px solid rgba(15, 91, 120, 0.12);
+  display: grid;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.capability-item {
+  padding: 16px 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.capability-item strong {
+  color: var(--color-text);
+}
+
+.alert {
+  padding: 14px 18px;
+}
+
+.alert.info {
+  background: rgba(15, 91, 120, 0.08);
+}
+
+.alert.error {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+.chart-layout {
+  display: grid;
+  gap: 14px;
+}
+
+.chart-layout--steady,
+.chart-layout--transient,
+.object-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.chart-panel.featured {
+  grid-column: span 2;
+}
+
+@media (max-width: 1400px) {
+  .masthead,
+  .command-deck,
+  .module-shell,
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .module-controls {
+    position: static;
+  }
+
+  .chart-layout--steady,
+  .chart-layout--transient,
+  .object-grid,
+  .stats-grid,
+  .insight-grid--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1080px) {
+  .module-tabs {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .module-tab {
+    min-width: 220px;
+  }
+}
+
+@media (max-width: 960px) {
+  .app-shell {
+    padding: 18px;
+  }
+
+  .command-summary-grid,
+  .chart-layout--steady,
+  .chart-layout--transient,
+  .object-grid,
+  .stats-grid,
+  .field-grid,
+  .insight-grid--two {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-panel.featured {
+    grid-column: auto;
+  }
+
+  .command-card--hero,
+  .masthead__side,
+  .detail-toolbar,
+  .detail-toolbar--inline,
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+}
