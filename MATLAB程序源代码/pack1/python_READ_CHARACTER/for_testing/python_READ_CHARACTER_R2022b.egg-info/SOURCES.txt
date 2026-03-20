@@ -1,8 +1,0 @@
-pyproject.toml
-setup.py
-python_READ_CHARACTER/__init__.py
-python_READ_CHARACTER/python_READ_CHARACTER.ctf
-python_READ_CHARACTER_R2022b.egg-info/PKG-INFO
-python_READ_CHARACTER_R2022b.egg-info/SOURCES.txt
-python_READ_CHARACTER_R2022b.egg-info/dependency_links.txt
-python_READ_CHARACTER_R2022b.egg-info/top_level.txt
