@@ -26,6 +26,8 @@ body,
 body {
   min-height: 100vh;
   color: var(--color-text);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
 }
 
 button,
@@ -36,6 +38,8 @@ select {
 
 h1 {
   margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: clamp(32px, 3vw, 44px);
   line-height: 1.04;
   letter-spacing: -0.04em;
@@ -43,6 +47,8 @@ h1 {
 
 h2 {
   margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: clamp(28px, 2.6vw, 38px);
   line-height: 1.08;
   letter-spacing: -0.03em;
@@ -50,14 +56,19 @@ h2 {
 
 h3 {
   margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 20px;
 }
 
 h4 {
   margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 16px;
 }
 
 p {
   margin: 0;
+  line-height: 1.65;
 }

@@ -15,7 +15,7 @@ export const transientSections: SectionSpec[] = [
   },
   {
     title: '控制器',
-    description: '定义需求转速和 PI 参数。',
+    description: '定义需求转速和双环 PI 控制参数。',
     fields: [
       { label: '转速需求', path: 'data.n2_demand', unit: 'rpm', step: '1' },
       { label: '外环 Kp', path: 'data.Kp_out', unit: '-', step: '0.001' },

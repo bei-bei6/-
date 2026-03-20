@@ -12,7 +12,7 @@ export function Masthead(props: MastheadProps) {
     <header className="masthead">
       <div className="masthead__copy">
         <div className="hero-title-block">
-          <p className="eyebrow">燃气轮机仿真</p>
+          <p className="eyebrow">燃机性能仿真</p>
           <h1>{props.title}</h1>
           <p className="lead">{props.description}</p>
         </div>

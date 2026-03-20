@@ -22,12 +22,12 @@ export function DesignScreen(props: DesignScreenProps) {
   return (
     <ModuleShell
       title="设计点计算"
-      description="设置设计点参数并查看主要结果。"
+      description="配置设计点参数，并查看功率、效率与站位结果。"
       eyebrow="设计点"
       controls={
         config ? (
           <>
-            <InlineInfo label="计算模式" value="设计点" emphasis="当前参数" />
+            <InlineInfo label="计算模式" value="设计点" emphasis="当前参数集" />
             {designSections.map((section, index) => (
               <FieldSection
                 key={section.title}
@@ -39,16 +39,16 @@ export function DesignScreen(props: DesignScreenProps) {
             ))}
           </>
         ) : (
-          <EmptyState title="默认参数尚未加载" text="正在加载参数。" compact />
+          <EmptyState title="默认参数尚未加载" text="系统正在加载设计点默认参数。" compact />
         )
       }
       results={
         props.result ? (
           <>
-            <Panel title="核心指标" description="查看功率、效率和转速结果。" eyebrow="结果">
+            <Panel title="核心指标" description="查看功率、效率和轴系转速的设计点结果。" eyebrow="结果">
               <StatsGrid
                 items={[
-                  { label: '功率输出', value: `${formatNumber(props.result.summary.power_output_kw, 2)} kW` },
+                  { label: '输出功率', value: `${formatNumber(props.result.summary.power_output_kw, 2)} kW` },
                   { label: '热效率', value: formatNumber(props.result.summary.thermal_efficiency, 6) },
                   { label: '高压轴转速', value: `${formatNumber(props.result.summary.ng_rpm, 2)} rpm` },
                   { label: '动力轴转速', value: `${formatNumber(props.result.summary.np_rpm, 2)} rpm` },
@@ -56,11 +56,11 @@ export function DesignScreen(props: DesignScreenProps) {
               />
             </Panel>
 
-            <Panel title="站位结果表" description="查看主要站位数据。" eyebrow="站位">
+            <Panel title="站位结果表" description="查看主要站位的温度、压力与流量数据。" eyebrow="站位">
               <StationTable rows={props.result.summary.stations ?? []} />
             </Panel>
 
-            <Panel title="设计点产物" description="查看本次计算输出。" eyebrow="产物">
+            <Panel title="设计点产物" description="检查本次计算导出的核心中间结果。" eyebrow="产物">
               <div className="insight-grid insight-grid--two">
                 <details className="fold-card">
                   <summary>查看 dp</summary>
@@ -74,13 +74,13 @@ export function DesignScreen(props: DesignScreenProps) {
             </Panel>
 
             {props.result.logs ? (
-              <Panel title="运行日志" description="查看本次计算日志。" eyebrow="日志">
+              <Panel title="运行日志" description="查看本次设计点计算日志。" eyebrow="日志">
                 <LogBlock text={props.result.logs} />
               </Panel>
             ) : null}
           </>
         ) : (
-          <EmptyState title="还没有设计点结果" text="先在左侧调整参数，再运行设计点计算。" accent="Design" />
+          <EmptyState title="还没有设计点结果" text="先在左侧调整参数，再启动设计点计算。" accent="Design" />
         )
       }
     />

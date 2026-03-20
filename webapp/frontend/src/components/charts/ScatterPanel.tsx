@@ -1,6 +1,8 @@
+import { useMemo } from 'react'
 import { CartesianGrid, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts'
 
 import type { ScatterTracePoint } from '../../types'
+import { downsampleRows } from '../../utils'
 import { axisLineStyle, axisTickStyle, baseChartMargin, formatChartAxisValue, formatChartTooltipValue } from './formatters'
 
 interface ScatterPanelProps {
@@ -12,13 +14,15 @@ interface ScatterPanelProps {
 }
 
 export function ScatterPanel(props: ScatterPanelProps) {
+  const renderedData = useMemo(() => downsampleRows(props.data, 220), [props.data])
+
   return (
     <div className="chart-panel">
       <div className="chart-panel__head">
         <div>
           <h4>{props.title}</h4>
           <p>
-            {props.xLabel ?? '流量'} / {props.yLabel ?? '压比'}
+            {props.xLabel ?? '\u6d41\u91cf'} / {props.yLabel ?? '\u538b\u6bd4'}
           </p>
         </div>
       </div>
@@ -48,11 +52,13 @@ export function ScatterPanel(props: ScatterPanelProps) {
             />
             <Tooltip
               allowEscapeViewBox={{ x: true, y: true }}
-              wrapperStyle={{ zIndex: 20 }}
+              wrapperStyle={{ zIndex: 20, pointerEvents: 'none' }}
+              isAnimationActive={false}
+              cursor={false}
               formatter={(value: unknown, name: string | number | undefined) => [formatChartTooltipValue(value), name ?? '']}
               contentStyle={{ borderRadius: 12, borderColor: '#d7e1e8' }}
             />
-            <Scatter data={props.data} fill={props.color} line={{ stroke: props.color, strokeWidth: 2 }} />
+            <Scatter data={renderedData} fill={props.color} line={{ stroke: props.color, strokeWidth: 2 }} isAnimationActive={false} />
           </ScatterChart>
         </ResponsiveContainer>
       </div>

@@ -24,9 +24,9 @@ interface ProjectScreenProps {
 export function ProjectScreen(props: ProjectScreenProps) {
   return (
     <section className="overview-grid project-grid">
-      <Panel title="项目文件管理" description="管理当前项目快照与本地保存。" eyebrow="项目">
+      <Panel title="项目文件管理" description="维护当前项目快照，并执行本地保存或恢复。" eyebrow="项目">
         <div className="project-stack">
-          <InlineInput label="项目名称" hint="本地保存时会作为文件名" value={props.projectName} onChange={props.onProjectNameChange} />
+          <InlineInput label="项目名称" hint="本地保存时会作为文件名使用" value={props.projectName} onChange={props.onProjectNameChange} />
           <div className="button-row">
             <button className="ghost-button" onClick={props.onNewProject}>新建</button>
             <button className="ghost-button" onClick={props.onOpenProject}>打开</button>
@@ -45,7 +45,7 @@ export function ProjectScreen(props: ProjectScreenProps) {
         />
       </Panel>
 
-      <Panel title="数据导出" description="导出计算结果与控制规律模板。" eyebrow="导出">
+      <Panel title="数据导出" description="导出计算结果和控制规律模板，便于复盘或交付。" eyebrow="导出">
         <div className="button-row button-row--wrap">
           <button className="ghost-button" disabled={!props.designResult} onClick={props.onExportDesignStations}>导出设计点站位表</button>
           <button className="ghost-button" disabled={!props.steadyResult} onClick={props.onExportSteadyPoints}>导出非设计点结果</button>

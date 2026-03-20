@@ -1,6 +1,6 @@
 import { formatNumber } from '../../utils'
 
-export const baseChartMargin = { top: 12, right: 24, bottom: 12, left: 18 }
+export const baseChartMargin = { top: 12, right: 44, bottom: 12, left: 18 }
 export const axisTickStyle = { fontSize: 12, fill: '#5b6f80' }
 export const axisLineStyle = { stroke: '#c7d3dd' }
 

@@ -28,9 +28,9 @@
 .status-pill {
   display: inline-flex;
   align-items: center;
-  padding: 8px 13px;
+  padding: 9px 14px;
   border-radius: 999px;
-  background: rgba(87, 110, 126, 0.12);
+  background: rgba(255, 255, 255, 0.08);
   color: #566a7b;
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -52,7 +52,7 @@
 .stat-card {
   position: relative;
   overflow: hidden;
-  padding: 18px;
+  padding: 20px 18px 18px;
 }
 
 .metric-tile::before,
@@ -61,7 +61,7 @@
   position: absolute;
   inset: 0 auto 0 0;
   width: 4px;
-  background: var(--accent);
+  background: linear-gradient(180deg, var(--accent), rgba(255, 255, 255, 0));
 }
 
 .metric-tile span,
@@ -82,43 +82,90 @@
 .inline-info strong,
 .empty-state strong {
   display: block;
-  margin-top: 8px;
+  margin-top: 10px;
   color: var(--color-text);
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 1.2;
 }
 
 .metric-tile small,
 .stat-card small {
   display: block;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .module-tab {
   display: grid;
-  gap: 4px;
+  gap: 10px;
   text-align: left;
-  padding: 14px 14px 15px;
-  background: transparent;
+  padding: 16px;
+  background:
+    linear-gradient(145deg, rgba(247, 250, 252, 0.92), rgba(240, 246, 249, 0.78)),
+    rgba(255, 255, 255, 0.82);
   cursor: pointer;
-  transition: transform var(--duration-fast) var(--easing-standard), background var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard);
+  transition:
+    transform var(--duration-fast) var(--easing-standard),
+    background var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard);
 }
 
-.module-tab small {
+.module-tab__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.module-tab small,
+.module-tab__index {
   color: #60788d;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
-.module-tab span {
+.module-tab__index {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(15, 91, 120, 0.08);
+}
+
+.module-tab__label {
   color: var(--color-text);
   font-weight: 700;
+  font-size: 16px;
+}
+
+.module-tab__description {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
 }
 
 .module-tab:hover,
 .module-tab.active {
-  background: linear-gradient(135deg, rgba(15, 91, 120, 0.12), rgba(29, 127, 109, 0.08));
-  border-color: rgba(15, 91, 120, 0.2);
+  background: linear-gradient(135deg, rgba(15, 91, 120, 0.16), rgba(20, 107, 99, 0.1));
+  border-color: rgba(15, 91, 120, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 16px 28px rgba(15, 91, 120, 0.12);
   transform: translateY(-1px);
+}
+
+.module-tab.active {
+  background: linear-gradient(135deg, rgba(12, 53, 74, 0.94), rgba(15, 91, 120, 0.88));
+}
+
+.module-tab.active small,
+.module-tab.active .module-tab__index,
+.module-tab.active .module-tab__description,
+.module-tab.active .module-tab__label {
+  color: #eef6fa;
+}
+
+.module-tab.active .module-tab__index {
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .field-section {
@@ -132,7 +179,7 @@
   cursor: pointer;
   display: grid;
   gap: 6px;
-  background: linear-gradient(180deg, rgba(245, 248, 251, 0.96), rgba(255, 255, 255, 0.82));
+  background: linear-gradient(180deg, rgba(246, 249, 251, 0.96), rgba(255, 255, 255, 0.78));
 }
 
 .field-section summary::-webkit-details-marker {
@@ -166,7 +213,7 @@
   gap: 8px;
   padding: 14px;
   border-radius: var(--radius-sm);
-  background: rgba(248, 250, 252, 0.88);
+  background: rgba(247, 250, 252, 0.92);
   border: 1px solid rgba(93, 116, 132, 0.1);
 }
 
@@ -184,13 +231,17 @@
 .select-group select,
 .table-input {
   width: 100%;
+  min-height: 46px;
   border: 1px solid rgba(93, 116, 132, 0.18);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.96);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.98);
   padding: 11px 12px;
   color: #142b40;
   font: inherit;
-  transition: border-color var(--duration-fast) var(--easing-standard), box-shadow var(--duration-fast) var(--easing-standard), background var(--duration-fast) var(--easing-standard);
+  transition:
+    border-color var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard),
+    background var(--duration-fast) var(--easing-standard);
 }
 
 .field-card input:focus,
@@ -200,7 +251,7 @@
 .table-input:focus {
   outline: none;
   border-color: rgba(15, 91, 120, 0.34);
-  box-shadow: 0 0 0 4px rgba(15, 91, 120, 0.1);
+  box-shadow: 0 0 0 4px rgba(15, 91, 120, 0.12);
 }
 
 .field-meta {
@@ -236,7 +287,10 @@
 .topology-card {
   text-align: left;
   cursor: pointer;
-  transition: transform var(--duration-fast) var(--easing-standard), box-shadow var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard);
+  transition:
+    transform var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard);
 }
 
 .topology-card:hover:not(:disabled),
@@ -338,8 +392,16 @@
 }
 
 .chart-panel {
+  position: relative;
+  z-index: 0;
   overflow: visible;
   min-width: 0;
+  transition: box-shadow var(--duration-fast) var(--easing-standard);
+}
+
+.chart-panel:hover,
+.chart-panel:focus-within {
+  z-index: 8;
 }
 
 .chart-panel__head {
@@ -355,7 +417,7 @@
   height: 320px;
   min-width: 0;
   min-height: 320px;
-  padding: 10px 14px 10px 4px;
+  padding: 10px 28px 10px 4px;
 }
 
 .chart-panel__legend {
@@ -386,6 +448,11 @@
   border-radius: 999px;
 }
 
+.chart-panel .recharts-tooltip-wrapper {
+  z-index: 48 !important;
+  pointer-events: none;
+}
+
 .primary-button,
 .secondary-button,
 .ghost-button,
@@ -395,7 +462,11 @@
   padding: 12px 16px;
   font: inherit;
   cursor: pointer;
-  transition: transform var(--duration-fast) var(--easing-standard), opacity var(--duration-fast) var(--easing-standard), background var(--duration-fast) var(--easing-standard), box-shadow var(--duration-fast) var(--easing-standard);
+  transition:
+    transform var(--duration-fast) var(--easing-standard),
+    opacity var(--duration-fast) var(--easing-standard),
+    background var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard);
 }
 
 .primary-button {

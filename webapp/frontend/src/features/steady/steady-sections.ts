@@ -3,7 +3,7 @@ import type { SectionSpec } from '../../components/forms/types'
 export const steadySections: SectionSpec[] = [
   {
     title: '工况目标',
-    description: '定义本次稳态求解的边界条件和目标功率。',
+    description: '定义本次稳态求解的边界条件与目标功率。',
     fields: [
       { label: '目标功率', path: 'Power_output', unit: 'W', step: '1000' },
       { label: '环境温度', path: 'data.T0', unit: 'K', step: '0.01' },
@@ -15,7 +15,7 @@ export const steadySections: SectionSpec[] = [
   },
   {
     title: '修正与耦合',
-    description: '控制修正开关和附加损失项。',
+    description: '控制修正开关以及附加损失项。',
     fields: [
       { label: '燃烧室修正', path: 'data.HGC.Burner', kind: 'boolean' },
       { label: '高压涡轮修正', path: 'data.HGC.HPT', kind: 'boolean' },

@@ -42,12 +42,17 @@ export function AppShell(props: AppShellProps) {
         metrics={props.metrics}
       />
 
-      <ModuleTabs tabs={props.tabs} activeTab={props.activeTab} onChange={props.onTabChange} />
+      <div className="app-topnav">
+        <div className="app-topnav__section">
+          <p className="eyebrow">模块导航</p>
+          <ModuleTabs tabs={props.tabs} activeTab={props.activeTab} onChange={props.onTabChange} />
+        </div>
+      </div>
 
       {props.busyMessage ? <AlertBanner tone="info" message={props.busyMessage} /> : null}
       {props.errorMessage ? <AlertBanner tone="error" message={props.errorMessage} /> : null}
 
-      {props.children}
+      <main className="app-main">{props.children}</main>
     </div>
   )
 }

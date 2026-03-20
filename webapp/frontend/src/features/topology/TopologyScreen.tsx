@@ -22,13 +22,13 @@ export function TopologyScreen(props: TopologyScreenProps) {
   return (
     <section className="overview-grid topology-grid">
       <Panel
-        title="燃机结构选型"
-        description="选择当前可用于计算的燃机结构。"
+        title="燃机拓扑选择"
+        description="选择当前可用于计算的燃机拓扑，并确认后续仿真入口。"
         eyebrow="结构"
       >
         <div className="topology-hero">
           <div>
-            <h4>{selectedTopologyMeta?.name ?? '未选择拓扑'}</h4>
+            <h4>{selectedTopologyMeta?.name ?? '尚未选择拓扑'}</h4>
             <p>{selectedTopologyMeta?.description ?? '请选择一个可用拓扑后继续。'}</p>
           </div>
           <div className="tag-row">
@@ -57,7 +57,7 @@ export function TopologyScreen(props: TopologyScreenProps) {
                     <p>{topology.description}</p>
                   </div>
                   <StatusPill active={topology.available} tone={topology.available ? 'success' : 'warning'}>
-                    {topology.available ? (active ? '当前选择' : '可选择') : '不可用'}
+                    {topology.available ? (active ? '当前使用' : '可选择') : '不可用'}
                   </StatusPill>
                 </div>
               </button>
@@ -68,7 +68,7 @@ export function TopologyScreen(props: TopologyScreenProps) {
 
       <Panel
         title="运行状态"
-        description="查看当前结构、运行环境和结果状态。"
+        description="查看当前拓扑、后端运行环境与结果产出状态。"
         eyebrow="状态"
       >
         <div className="capability-list">
@@ -82,7 +82,7 @@ export function TopologyScreen(props: TopologyScreenProps) {
           </div>
           <div className="capability-item">
             <strong>模块状态</strong>
-            <span>设计点、非设计点与过渡态可计算</span>
+            <span>设计点、非设计点与过渡态共用统一控制台。</span>
           </div>
         </div>
 

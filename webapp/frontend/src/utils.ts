@@ -175,3 +175,26 @@ export function buildMergedChartRows(seriesList: ChartSeries[]): Array<Record<st
 
   return Array.from(rows.values()).sort((left, right) => left.time - right.time)
 }
+
+function buildSampleIndexes(length: number, maxPoints: number): number[] {
+  if (length <= maxPoints) {
+    return Array.from({ length }, (_, index) => index)
+  }
+
+  const indexes = new Set<number>([0, length - 1])
+  const step = (length - 1) / (maxPoints - 1)
+
+  for (let index = 1; index < maxPoints - 1; index += 1) {
+    indexes.add(Math.round(index * step))
+  }
+
+  return Array.from(indexes).sort((left, right) => left - right)
+}
+
+export function downsampleRows<T>(rows: T[], maxPoints = 180): T[] {
+  if (rows.length <= maxPoints || maxPoints < 3) {
+    return rows
+  }
+
+  return buildSampleIndexes(rows.length, maxPoints).map((index) => rows[index])
+}

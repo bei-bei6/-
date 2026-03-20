@@ -25,7 +25,7 @@ export function FieldSection(props: FieldSectionProps) {
               <span className="field-label">{field.label}</span>
               {kind === 'boolean' ? (
                 <select value={numberValue(rawValue, 0)} onChange={(event) => props.onChange(field.path, Number(event.target.value))}>
-                  <option value={1}>开启</option>
+                  <option value={1}>启用</option>
                   <option value={0}>关闭</option>
                 </select>
               ) : kind === 'list' ? (

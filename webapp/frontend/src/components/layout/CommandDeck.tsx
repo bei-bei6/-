@@ -13,7 +13,7 @@ export function CommandDeck(props: CommandDeckProps) {
     <section className="command-deck">
       <div className="command-card command-card--hero">
         <div className="command-card__copy">
-          <p className="eyebrow">项目</p>
+          <p className="eyebrow">当前项目</p>
           <h2>{props.title}</h2>
           <p className="deck-copy">{props.description}</p>
           <div className="tag-row">

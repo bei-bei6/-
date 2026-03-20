@@ -2,8 +2,8 @@ import type { SectionSpec } from '../../components/forms/types'
 
 export const designSections: SectionSpec[] = [
   {
-    title: '环境与进气',
-    description: '定义入口环境和进气恢复参数。',
+    title: '环境与进口',
+    description: '定义入口环境条件与进口恢复参数。',
     fields: [
       { label: '环境温度', path: 'Amb.T', unit: 'K', step: '0.01' },
       { label: '环境压力', path: 'Amb.P', unit: 'Pa', step: '1' },
@@ -13,7 +13,7 @@ export const designSections: SectionSpec[] = [
   },
   {
     title: '压气机与燃烧室',
-    description: '调节核心气路与燃烧参数。',
+    description: '调整核心气路与燃烧段的关键参数。',
     fields: [
       { label: '压气机压比', path: 'HPC.Pr', unit: '-', step: '0.01' },
       { label: '压气机效率', path: 'HPC.Eff', unit: '-', step: '0.0001' },

@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useMemo } from 'react'
 import {
   CartesianGrid,
   Line,
@@ -9,6 +10,7 @@ import {
   YAxis,
 } from 'recharts'
 
+import { downsampleRows } from '../../utils'
 import { axisLineStyle, axisTickStyle, baseChartMargin, formatChartAxisValue, formatChartTooltipValue } from './formatters'
 
 interface LinePanelProps {
@@ -21,6 +23,8 @@ interface LinePanelProps {
 }
 
 export function LinePanel(props: LinePanelProps) {
+  const renderedRows = useMemo(() => downsampleRows(props.rows, props.lines.length > 3 ? 160 : 220), [props.lines.length, props.rows])
+
   return (
     <div className={clsx('chart-panel', { featured: props.featured })}>
       <div className="chart-panel__head">
@@ -31,7 +35,7 @@ export function LinePanel(props: LinePanelProps) {
       </div>
       <div className="chart-panel__body">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={props.rows} margin={baseChartMargin}>
+          <LineChart data={renderedRows} margin={baseChartMargin}>
             <CartesianGrid strokeDasharray="3 3" stroke="#d4dce2" />
             <XAxis
               dataKey={props.xKey}
@@ -56,6 +60,7 @@ export function LinePanel(props: LinePanelProps) {
               allowEscapeViewBox={{ x: true, y: true }}
               wrapperStyle={{ zIndex: 20, pointerEvents: 'none' }}
               isAnimationActive={false}
+              cursor={false}
               formatter={(value: unknown, name: string | number | undefined) => [formatChartTooltipValue(value), name ?? '']}
               contentStyle={{ borderRadius: 12, borderColor: '#d7e1e8' }}
             />

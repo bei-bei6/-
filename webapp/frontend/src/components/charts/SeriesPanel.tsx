@@ -11,7 +11,7 @@ import {
 } from 'recharts'
 
 import type { ChartSeries } from '../../types'
-import { buildMergedChartRows } from '../../utils'
+import { buildMergedChartRows, downsampleRows } from '../../utils'
 import { linePalette } from './constants'
 import { axisLineStyle, axisTickStyle, baseChartMargin, formatChartAxisValue, formatChartTooltipValue } from './formatters'
 
@@ -24,6 +24,7 @@ interface SeriesPanelProps {
 
 export function SeriesPanel(props: SeriesPanelProps) {
   const rows = useMemo(() => buildMergedChartRows(props.series), [props.series])
+  const renderedRows = useMemo(() => downsampleRows(rows, props.series.length > 3 ? 160 : 220), [rows, props.series.length])
 
   return (
     <div className={clsx('chart-panel', { featured: props.featured })}>
@@ -35,7 +36,7 @@ export function SeriesPanel(props: SeriesPanelProps) {
       </div>
       <div className="chart-panel__body">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rows} margin={baseChartMargin}>
+          <LineChart data={renderedRows} margin={baseChartMargin}>
             <CartesianGrid strokeDasharray="3 3" stroke="#d4dce2" />
             <XAxis
               dataKey="time"
@@ -60,6 +61,7 @@ export function SeriesPanel(props: SeriesPanelProps) {
               allowEscapeViewBox={{ x: true, y: true }}
               wrapperStyle={{ zIndex: 20, pointerEvents: 'none' }}
               isAnimationActive={false}
+              cursor={false}
               formatter={(value: unknown, name: string | number | undefined) => [formatChartTooltipValue(value), name ?? '']}
               contentStyle={{ borderRadius: 12, borderColor: '#d7e1e8' }}
             />

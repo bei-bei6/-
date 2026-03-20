@@ -36,6 +36,7 @@ import {
 
 type BusyKey = 'bootstrap' | 'design' | 'steady' | 'transient' | null
 
+const releaseVersion = '1.0.1'
 const statAccents = ['#0f5b78', '#1d7f6d', '#d67a2d', '#295ea8']
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
   const [topologies, setTopologies] = useState<Topology[]>([])
   const [defaults, setDefaults] = useState<DefaultsResponse['defaults'] | null>(null)
   const [selectedTopology, setSelectedTopology] = useState('two_spool_sas')
-  const [projectName, setProjectName] = useState('gas-turbine-web-project')
+  const [projectName, setProjectName] = useState('gas-turbine-project')
   const [activeTab, setActiveTab] = useState<TabId>('topology')
   const [busy, setBusy] = useState<BusyKey>('bootstrap')
   const [error, setError] = useState('')
@@ -97,10 +98,13 @@ function App() {
     time: [],
     Loading: [],
   }) as { time?: number[]; Loading?: number[] }
+  const generatedResultCount = [designResult, steadyResult, transientResult].filter(Boolean).length
+  const runtimeReady = health?.runtimeInstalled ?? false
+  const topologyReady = selectedTopologyMeta?.available ?? false
 
   const projectSnapshot = useMemo(
     () => ({
-      version: '2.0.0',
+      version: releaseVersion,
       projectName,
       selectedTopology,
       config: {
@@ -200,7 +204,7 @@ function App() {
     setSteadyResult(null)
     setTransientResult(null)
     setSelectedTopology(topologies.find((item) => item.available)?.id ?? 'two_spool_sas')
-    setProjectName('gas-turbine-web-project')
+    setProjectName('gas-turbine-project')
     setSteadyLoadsText((numberValue(defaults.steadyState.Power_output, 13_200_000) / 1_000_000).toString())
     setActiveTab('topology')
     setError('')
@@ -334,13 +338,21 @@ function App() {
     )
   }
 
+  const busyMessage =
+    busy && busy !== 'bootstrap' ? '计算正在执行，请等待当前任务完成后再进行下一步操作。' : undefined
+  const errorMessage = error
+    ? defaults
+      ? error
+      : `后端接口暂不可用：${error}。当前可先浏览前端结构，启动后端后再执行计算。`
+    : undefined
+
   if (!defaults && busy === 'bootstrap') {
     return (
       <div className="app-loading">
         <div className="app-loading__card">
           <p className="eyebrow">系统初始化</p>
-          <strong>正在加载系统参数…</strong>
-          <span>请稍候。</span>
+          <strong>正在加载燃机仿真工作台</strong>
+          <span>正在同步运行环境与默认参数，请稍候。</span>
         </div>
       </div>
     )
@@ -350,14 +362,14 @@ function App() {
     <>
       <AppShell
         title="总体性能仿真控制台"
-        description="用于燃气轮机设计点、非设计点与过渡态计算分析。"
+        description="面向燃气轮机设计点、非设计点与过渡态分析的统一前端工作台。"
         status={
           <>
-            <StatusPill active={health?.runtimeInstalled ?? false} tone={health?.runtimeInstalled ? 'success' : 'warning'}>
-              {health?.runtimeInstalled ? '运行环境正常' : '运行环境异常'}
+            <StatusPill active={runtimeReady} tone={runtimeReady ? 'success' : 'warning'}>
+              {runtimeReady ? '运行环境正常' : '运行环境异常'}
             </StatusPill>
-            <StatusPill active={selectedTopologyMeta?.available ?? false} tone={selectedTopologyMeta?.available ? 'success' : 'warning'}>
-              {selectedTopologyMeta?.available ? '拓扑可用' : '拓扑不可用'}
+            <StatusPill active={topologyReady} tone={topologyReady ? 'success' : 'warning'}>
+              {topologyReady ? '拓扑可用' : '拓扑未就绪'}
             </StatusPill>
           </>
         }
@@ -378,7 +390,7 @@ function App() {
         commandDescription={activeTabMeta.description}
         contextTags={[
           selectedTopologyMeta?.name ?? '未选择拓扑',
-          health?.runtimeInstalled ? '运行环境正常' : '运行环境异常',
+          runtimeReady ? '后端在线' : '后端离线',
           activeTabMeta.label,
         ]}
         commandActions={
@@ -396,7 +408,7 @@ function App() {
         }
         metrics={
           <>
-            <MetricTile label="当前拓扑" value={selectedTopologyMeta?.name ?? '-'} accent={statAccents[0]} detail="当前模型" />
+            <MetricTile label="当前拓扑" value={selectedTopologyMeta?.name ?? '--'} accent={statAccents[0]} detail="当前模型" />
             <MetricTile
               label="稳态默认功率"
               value={`${formatNumber(numberValue(steadyConfig?.Power_output, 0) / 1_000_000, 2)} MW`}
@@ -409,21 +421,26 @@ function App() {
               accent={statAccents[2]}
               detail="当前设定"
             />
-            <MetricTile label="计算模式" value="设计点 / 稳态 / 动态" accent={statAccents[3]} detail="当前可用" />
+            <MetricTile
+              label="版本状态"
+              value={`v${releaseVersion}`}
+              accent={statAccents[3]}
+              detail={`${generatedResultCount}/3 模块已产出`}
+            />
           </>
         }
         tabs={tabs}
         activeTab={activeTab}
         onTabChange={setActiveTab}
-        busyMessage={busy && busy !== 'bootstrap' ? '计算进行中，请稍候...' : undefined}
-        errorMessage={error || undefined}
+        busyMessage={busyMessage}
+        errorMessage={errorMessage}
       >
         {activeTab === 'topology' ? (
           <TopologyScreen
             topologies={topologies}
             selectedTopology={selectedTopology}
             onSelect={setSelectedTopology}
-            runtimeInstalled={health?.runtimeInstalled ?? false}
+            runtimeInstalled={runtimeReady}
             designReady={Boolean(designResult)}
             steadyReady={Boolean(steadyResult)}
             transientReady={Boolean(transientResult)}
@@ -467,7 +484,7 @@ function App() {
         {activeTab === 'project' ? (
           <ProjectScreen
             projectName={projectName}
-            topologyName={selectedTopologyMeta?.name ?? '-'}
+            topologyName={selectedTopologyMeta?.name ?? '--'}
             projectSnapshot={projectSnapshot}
             designResult={designResult}
             steadyResult={steadyResult}

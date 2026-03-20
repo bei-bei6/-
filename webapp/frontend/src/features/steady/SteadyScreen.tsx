@@ -34,12 +34,12 @@ export function SteadyScreen(props: SteadyScreenProps) {
   return (
     <ModuleShell
       title="非设计点计算"
-      description="设置负载工况并查看稳态结果。"
+      description="按不同负载工况执行稳态分析，并对比输出趋势。"
       eyebrow="非设计点"
       controls={
         config ? (
           <>
-            <InlineInfo label="工况模式" value="多工况" emphasis="输入功率点列表" />
+            <InlineInfo label="工况模式" value="多工况批处理" emphasis="输入功率点列表" />
             <InlineInput label="功率点列表" hint="输入 MW，例如 8, 10, 12, 13.2" value={props.loadsText} onChange={props.onLoadsChange} />
             {steadySections.map((section, index) => (
               <FieldSection
@@ -52,13 +52,13 @@ export function SteadyScreen(props: SteadyScreenProps) {
             ))}
           </>
         ) : (
-          <EmptyState title="默认参数尚未加载" text="正在加载参数。" compact />
+          <EmptyState title="默认参数尚未加载" text="系统正在加载稳态分析默认参数。" compact />
         )
       }
       results={
         props.result ? (
           <>
-            <Panel title="工况概览" description="查看本次稳态计算的整体结果。" eyebrow="概览">
+            <Panel title="工况概览" description="查看本次稳态求解的整体结果与输出上限。" eyebrow="概览">
               <StatsGrid
                 items={[
                   { label: '工况点数', value: props.result.runs.length.toString() },
@@ -83,7 +83,7 @@ export function SteadyScreen(props: SteadyScreenProps) {
               />
               <LinePanel
                 title="压比变化"
-                description="观察不同工况下的压比变化趋势。"
+                description="观察不同工况下各级压比的变化趋势。"
                 rows={steadyPoints as unknown as Array<Record<string, number>>}
                 xKey="input_load_mw"
                 lines={[
@@ -99,7 +99,7 @@ export function SteadyScreen(props: SteadyScreenProps) {
 
             <Panel
               title="工况明细"
-              description="查看当前所选工况的详细站位和部件性能。"
+              description="查看当前所选工况的详细站位与部件性能。"
               eyebrow="明细"
               actions={
                 <div className="detail-toolbar detail-toolbar--inline">
@@ -140,13 +140,13 @@ export function SteadyScreen(props: SteadyScreenProps) {
             </Panel>
 
             {activeRun?.logs ? (
-              <Panel title="运行日志" description="查看当前工况日志。" eyebrow="日志">
+              <Panel title="运行日志" description="查看当前工况的求解日志。" eyebrow="日志">
                 <LogBlock text={activeRun.logs} />
               </Panel>
             ) : null}
           </>
         ) : (
-          <EmptyState title="还没有非设计点结果" text="先设置负载点列表，再运行非设计点计算。" accent="Steady" />
+          <EmptyState title="还没有非设计点结果" text="先设置负载点列表，再启动非设计点计算。" accent="Steady" />
         )
       }
     />

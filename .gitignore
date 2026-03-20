@@ -1,6 +1,9 @@
 .DS_Store
 Thumbs.db
 
+.claude/
+.vscode/
+.idea/
 .playwright-cli/
 output/
 
@@ -8,11 +11,20 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.log
 
 .venv/
+.venv-webapp/
 venv/
 env/
 
 webapp/logs/
+webapp/backend/data/
 webapp/frontend/node_modules/
 webapp/frontend/dist/
+
+MATLAB*/parameter/*.backup.mat
+MATLAB*/result/*.mat
+MATLAB*/pack1/**/for_testing/build/
+MATLAB*/pack1/**/for_testing/dist/
+MATLAB*/pack1/**/for_testing/*.log

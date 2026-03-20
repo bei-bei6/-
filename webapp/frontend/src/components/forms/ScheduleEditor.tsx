@@ -11,7 +11,7 @@ export function ScheduleEditor(props: ScheduleEditorProps) {
   return (
     <div className="schedule-editor">
       <div className="detail-toolbar detail-toolbar--stack">
-        <button className="ghost-button" onClick={props.onAdd}>添加行</button>
+        <button className="ghost-button" onClick={props.onAdd}>新增行</button>
         <button className="ghost-button" onClick={props.onImport}>导入 CSV</button>
         <button className="ghost-button" onClick={props.onExport}>导出 CSV</button>
       </div>
